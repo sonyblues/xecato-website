@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const manrope = Manrope({
+// Self-hosted variable fonts (latin subset) so the build never depends on
+// reaching Google Fonts from the build server.
+const manrope = localFont({
+  src: "../fonts/Manrope-latin.woff2",
   variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: "200 800",
+  display: "swap",
 });
 
-const inter = Inter({
+const inter = localFont({
+  src: "../fonts/Inter-latin.woff2",
   variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: "100 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
