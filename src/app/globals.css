@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0e0e0f;
+  --bg-elevated: #141415;
+  --fg: #ede8df;
+  --fg-muted: rgba(237, 232, 223, 0.62);
+  --fg-faint: rgba(237, 232, 223, 0.38);
+  --accent: #c9a15a;
+  --accent-soft: rgba(201, 161, 90, 0.18);
+  --hairline: rgba(237, 232, 223, 0.12);
+  /* Sampled from the logo mark: light bronze at the top-left corner to deep bronze at the bottom-right */
+  --logo-1: #c9a06f;
+  --logo-2: #b0885e;
+  --logo-3: #9b714a;
+  --logo-4: #8d603b;
+  --logo-gradient: linear-gradient(135deg, var(--logo-1) 0%, var(--logo-2) 32%, var(--logo-3) 60%, var(--logo-4) 100%);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-hairline: var(--hairline);
+  --font-display: var(--font-manrope);
+  --font-body: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  overflow-x: clip;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Logo gradient as a surface, as text, and as a thin line */
+.bg-logo {
+  background-image: var(--logo-gradient);
+}
+.text-logo {
+  background-image: var(--logo-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.line-logo {
+  background-image: var(--logo-gradient);
+}
+
+/* Wide-tracked uppercase labels used throughout the site */
+.label {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Soft warm glow that follows the pointer on project cards.
+   --mx / --my are set from JavaScript as percentages. */
+.glow-card {
+  position: relative;
+  isolation: isolate;
+}
+.glow-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(201, 160, 111, 0.24),
+    transparent 60%
+  );
+}
+.glow-card:hover::after {
+  opacity: 1;
+}
+
+/* Hairline that draws itself in from the start edge when revealed */
+.rule {
+  height: 1px;
+  background: var(--hairline);
+  transform-origin: 0 50%;
+}
+[dir="rtl"] .rule {
+  transform-origin: 100% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
