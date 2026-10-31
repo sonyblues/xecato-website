@@ -35,7 +35,8 @@ npm run dev
 
 - Node 20 or newer
 - Install: `npm install`
-- Build: `npm run build`
+- Build: `npm run build` (uses the webpack bundler; Hostinger's build container cannot start
+  Turbopack's PostCSS worker. `npm run build:turbopack` is available for other hosts.)
 - Start: `npm start`
 
 The contact form currently confirms locally only; wire `onSubmit` in
